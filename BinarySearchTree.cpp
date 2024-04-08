@@ -5,7 +5,6 @@ BinarySearchTree::BinarySearchTree() : root(nullptr) {}
 
 BinarySearchTree::BinarySearchTree(const BinarySearchTree& other) {
     root = nullptr;
-    // Копируем дерево рекурсивно
     if (other.root)
         root = new Node(other.root->key);
 }
@@ -14,18 +13,20 @@ BinarySearchTree::~BinarySearchTree() {
     deleteTree(root);
 }
 
+BinarySearchTree::Node* BinarySearchTree::copy(const Node* node) {
+    if (!node)
+        return nullptr;
+    Node* newNode = new Node(node->key);
+    newNode->left = copy(node->left);
+    newNode->right = copy(node->right);
+    return newNode;
+}
+
 BinarySearchTree& BinarySearchTree::operator=(const BinarySearchTree& other) {
-    if (this == &other) // Проверка на самоприсваивание
-        return *this;
-
-    // Очищаем текущее дерево
-    deleteTree(root);
-    root = nullptr;
-
-    // Копируем дерево рекурсивно
-    if (other.root)
-        root = new Node(other.root->key);
-
+    if (this != &other) {
+        deleteTree(root);
+        root = copy(other.root);
+    }
     return *this;
 }
 
@@ -43,7 +44,7 @@ void BinarySearchTree::print() {
 }
 
 bool BinarySearchTree::insert(int key) {
-    if (contains(key)) // Проверяем, не содержится ли уже ключ
+    if (contains(key))
         return false;
     root = insertRecursive(root, key);
     return true;
@@ -54,7 +55,7 @@ bool BinarySearchTree::contains(int key) {
 }
 
 bool BinarySearchTree::erase(int key) {
-    if (!contains(key)) // Проверяем, содержится ли ключ
+    if (!contains(key))
         return false;
     root = eraseRecursive(root, key);
     return true;

@@ -8,6 +8,7 @@ private:
     };
 
     Node* root;
+    Node* copy(const Node* node);
     void deleteTree(Node* root);
     Node* insertRecursive(Node* root, int key);
     bool containsRecursive(Node* root, int key);
