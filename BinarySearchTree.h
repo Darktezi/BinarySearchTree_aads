@@ -9,9 +9,18 @@ private:
 
     Node* root;
     void deleteTree(Node* root);
+    Node* insertRecursive(Node* root, int key);
+    bool containsRecursive(Node* root, int key);
+    Node* eraseRecursive(Node* root, int key);
+    void printRecursive(Node* root);
 public:
     BinarySearchTree();
     BinarySearchTree(const BinarySearchTree& other);
     ~BinarySearchTree();
     BinarySearchTree& operator=(const BinarySearchTree& other);
+
+    void print();
+    bool insert(int key);
+    bool contains(int key);
+    bool erase(int key);
 };

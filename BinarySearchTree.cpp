@@ -36,3 +36,89 @@ void BinarySearchTree::deleteTree(Node* root) {
         delete root;
     }
 }
+
+void BinarySearchTree::print() {
+    printRecursive(root);
+    std::cout << std::endl;
+}
+
+bool BinarySearchTree::insert(int key) {
+    if (contains(key)) // Проверяем, не содержится ли уже ключ
+        return false;
+    root = insertRecursive(root, key);
+    return true;
+}
+
+bool BinarySearchTree::contains(int key) {
+    return containsRecursive(root, key);
+}
+
+bool BinarySearchTree::erase(int key) {
+    if (!contains(key)) // Проверяем, содержится ли ключ
+        return false;
+    root = eraseRecursive(root, key);
+    return true;
+}
+
+BinarySearchTree::Node* BinarySearchTree::insertRecursive(Node* root, int key) {
+    if (!root)
+        return new Node(key);
+
+    if (key < root->key)
+        root->left = insertRecursive(root->left, key);
+    else if (key > root->key)
+        root->right = insertRecursive(root->right, key);
+
+    return root;
+}
+
+bool BinarySearchTree::containsRecursive(Node* root, int key) {
+    if (!root)
+        return false;
+
+    if (key == root->key)
+        return true;
+
+    if (key < root->key)
+        return containsRecursive(root->left, key);
+    else
+        return containsRecursive(root->right, key);
+}
+
+BinarySearchTree::Node* BinarySearchTree::eraseRecursive(Node* root, int key) {
+    if (!root)
+        return root;
+
+    if (key < root->key)
+        root->left = eraseRecursive(root->left, key);
+    else if (key > root->key)
+        root->right = eraseRecursive(root->right, key);
+    else {
+        if (!root->left) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        }
+        else if (!root->right) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        Node* temp = root->right;
+        while (temp->left)
+            temp = temp->left;
+
+        root->key = temp->key;
+        root->right = eraseRecursive(root->right, temp->key);
+    }
+    return root;
+}
+
+void BinarySearchTree::printRecursive(Node* root) {
+    if (root) {
+        printRecursive(root->left);
+        std::cout << root->key << " ";
+        printRecursive(root->right);
+    }
+}
