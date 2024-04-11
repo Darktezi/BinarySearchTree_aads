@@ -1,3 +1,5 @@
+#pragma once
+
 class BinarySearchTree {
 private:
     struct Node {
@@ -24,4 +26,5 @@ public:
     bool insert(int key);
     bool contains(int key);
     bool erase(int key);
+    Node* getRoot() const { return root; }
 };

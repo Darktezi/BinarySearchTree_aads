@@ -22,7 +22,7 @@ double fillContainer(BinarySearchTree& tree, int size) {
     return duration.count();
 }
 
-double containsInContainer(BinarySearchTree& tree, int size) {
+double containsInContainer(BinarySearchTree& tree, int size){
     double total_time = 0;
 
     for (int i = 0; i < size; ++i) {
@@ -111,46 +111,46 @@ double insertAndEraseInVector(std::vector<int>& vec, int size) {
     return total_time / size;
 }
 
-int main() {
-    int sizes[] = { 1000, 10000, 100000 };
-    int attempts = 100;
-
-    for (int size : sizes) {
-        double bst_total_fill_time = 0;
-        double bst_total_search_time = 0;
-        double bst_total_insert_erase_time = 0;
-
-        double vector_total_fill_time = 0;
-        double vector_total_search_time = 0;
-        double vector_total_insert_erase_time = 0;
-
-        for (int i = 0; i < attempts; ++i) {
-            BinarySearchTree tree;
-            std::vector<int> vec;
-            bst_total_fill_time += fillContainer(tree, size);
-            bst_total_search_time += containsInContainer(tree, size);
-            bst_total_insert_erase_time += insertAndEraseInContainer(tree, size);
-            vector_total_fill_time += fillVector(vec, size);
-            vector_total_search_time += searchInVector(vec, size);
-            vector_total_insert_erase_time += insertAndEraseInVector(vec, size);
-        }
-
-        double bst_average_fill_time = bst_total_fill_time / attempts;
-        double bst_average_search_time = bst_total_search_time / attempts;
-        double bst_average_insert_erase_time = bst_total_insert_erase_time / attempts;
-
-        double vector_average_fill_time = vector_total_fill_time / attempts;
-        double vector_average_search_time = vector_total_search_time / attempts;
-        double vector_average_insert_erase_time = vector_total_insert_erase_time / attempts;
-
-        std::cout << "BST average search time for " << size << " elements: " << bst_average_search_time << " milliseconds" << std::endl;
-        std::cout << "BST average fill time for " << size << " elements: " << bst_average_fill_time << " milliseconds" << std::endl;
-        std::cout << "BST average insert and erase time for " << size << " elements: " << bst_average_insert_erase_time << " milliseconds" << std::endl;
-
-        std::cout << "Vector average fill time for " << size << " elements: " << vector_average_fill_time << " milliseconds" << std::endl;
-        std::cout << "Vector average search time for " << size << " elements: " << vector_average_search_time << " milliseconds" << std::endl;
-        std::cout << "Vector average insert and erase time for " << size << " elements: " << vector_average_insert_erase_time << " milliseconds" << std::endl;
-    }
-
-    return 0;
-}
+//int main() {
+//    int sizes[] = { 1000, 10000, 100000 };
+//    int attempts = 100;
+//
+//    for (int size : sizes) {
+//        double bst_total_fill_time = 0;
+//        double bst_total_search_time = 0;
+//        double bst_total_insert_erase_time = 0;
+//
+//        double vector_total_fill_time = 0;
+//        double vector_total_search_time = 0;
+//        double vector_total_insert_erase_time = 0;
+//
+//        for (int i = 0; i < attempts; ++i) {
+//            BinarySearchTree tree;
+//            std::vector<int> vec;
+//            bst_total_fill_time += fillContainer(tree, size);
+//            bst_total_search_time += containsInContainer(tree, size);
+//            bst_total_insert_erase_time += insertAndEraseInContainer(tree, size);
+//            vector_total_fill_time += fillVector(vec, size);
+//            vector_total_search_time += searchInVector(vec, size);
+//            vector_total_insert_erase_time += insertAndEraseInVector(vec, size);
+//        }
+//
+//        double bst_average_fill_time = bst_total_fill_time / attempts;
+//        double bst_average_search_time = bst_total_search_time / attempts;
+//        double bst_average_insert_erase_time = bst_total_insert_erase_time / attempts;
+//
+//        double vector_average_fill_time = vector_total_fill_time / attempts;
+//        double vector_average_search_time = vector_total_search_time / attempts;
+//        double vector_average_insert_erase_time = vector_total_insert_erase_time / attempts;
+//
+//        std::cout << "BST average search time for " << size << " elements: " << bst_average_search_time << " milliseconds" << std::endl;
+//        std::cout << "BST average fill time for " << size << " elements: " << bst_average_fill_time << " milliseconds" << std::endl;
+//        std::cout << "BST average insert and erase time for " << size << " elements: " << bst_average_insert_erase_time << " milliseconds" << std::endl;
+//
+//        std::cout << "Vector average fill time for " << size << " elements: " << vector_average_fill_time << " milliseconds" << std::endl;
+//        std::cout << "Vector average search time for " << size << " elements: " << vector_average_search_time << " milliseconds" << std::endl;
+//        std::cout << "Vector average insert and erase time for " << size << " elements: " << vector_average_insert_erase_time << " milliseconds" << std::endl;
+//    }
+//
+//    return 0;
+//}

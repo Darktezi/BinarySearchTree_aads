@@ -1,5 +1,7 @@
 #include "BinarySearchTree.h"
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 BinarySearchTree::BinarySearchTree() : root(nullptr) {}
 
@@ -50,7 +52,7 @@ bool BinarySearchTree::insert(int key) {
     return true;
 }
 
-bool BinarySearchTree::contains(int key) {
+bool BinarySearchTree::contains(int key){
     return containsRecursive(root, key);
 }
 
@@ -73,7 +75,7 @@ BinarySearchTree::Node* BinarySearchTree::insertRecursive(Node* root, int key) {
     return root;
 }
 
-bool BinarySearchTree::containsRecursive(Node* root, int key) {
+bool BinarySearchTree::containsRecursive(Node* root, int key){
     if (!root)
         return false;
 
