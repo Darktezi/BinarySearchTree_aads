@@ -1,13 +1,14 @@
 #pragma once
 
+struct Node {
+    int key;
+    Node* left;
+    Node* right;
+    Node(const int k) : key(k), left(nullptr), right(nullptr) {}
+};
+
 class BinarySearchTree {
 private:
-    struct Node {
-        int key;
-        Node* left;
-        Node* right;
-        Node(const int k) : key(k), left(nullptr), right(nullptr) {}
-    };
 
     Node* root;
     Node* copy(const Node* node);

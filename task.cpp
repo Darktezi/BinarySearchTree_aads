@@ -8,27 +8,19 @@ int main() {
     set1.insert(1);
     set1.insert(2);
     set1.insert(3);
-    set1.insert(4);
 
     BinarySearchTree set2;
-    set2.insert(2);
+    set2.insert(3);
     set2.insert(4);
-    set2.insert(6);
-    set2.insert(8);
+    set2.insert(5);
 
-    std::vector<int> intersection_result = Operations::intersection(set1, set2);
-    std::cout << "Intersection of sets: ";
-    for (int elem : intersection_result) {
-        std::cout << elem << " ";
-    }
-    std::cout << std::endl;
+    BinarySearchTree unionResult = SetOperations::unionSet(set1, set2);
+    std::cout << "Union: ";
+    unionResult.print();
 
-    std::vector<int> difference_result = Operations::difference(set1, set2);
-    std::cout << "Difference of sets (set1 - set2): ";
-    for (int elem : difference_result) {
-        std::cout << elem << " ";
-    }
-    std::cout << std::endl;
+    BinarySearchTree symmetricDiffResult = SetOperations::symmetricDifference(set1, set2);
+    std::cout << "Symmetric Difference: ";
+    symmetricDiffResult.print();
 
     return 0;
 }

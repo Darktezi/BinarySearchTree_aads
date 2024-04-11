@@ -15,7 +15,7 @@ BinarySearchTree::~BinarySearchTree() {
     deleteTree(root);
 }
 
-BinarySearchTree::Node* BinarySearchTree::copy(const Node* node) {
+Node* BinarySearchTree::copy(const Node* node) {
     if (!node)
         return nullptr;
     Node* newNode = new Node(node->key);
@@ -63,7 +63,7 @@ bool BinarySearchTree::erase(int key) {
     return true;
 }
 
-BinarySearchTree::Node* BinarySearchTree::insertRecursive(Node* root, int key) {
+Node* BinarySearchTree::insertRecursive(Node* root, int key) {
     if (!root)
         return new Node(key);
 
@@ -88,7 +88,7 @@ bool BinarySearchTree::containsRecursive(Node* root, int key){
         return containsRecursive(root->right, key);
 }
 
-BinarySearchTree::Node* BinarySearchTree::eraseRecursive(Node* root, int key) {
+Node* BinarySearchTree::eraseRecursive(Node* root, int key) {
     if (!root)
         return root;
 

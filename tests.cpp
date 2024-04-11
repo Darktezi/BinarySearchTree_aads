@@ -113,7 +113,7 @@ double insertAndEraseInVector(std::vector<int>& vec, int size) {
 
 //int main() {
 //    int sizes[] = { 1000, 10000, 100000 };
-//    int attempts = 100;
+//    int attempts = 1000;
 //
 //    for (int size : sizes) {
 //        double bst_total_fill_time = 0;
