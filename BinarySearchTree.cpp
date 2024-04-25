@@ -15,7 +15,7 @@ BinarySearchTree::~BinarySearchTree() {
     deleteTree(root);
 }
 
-Node* BinarySearchTree::copy(const Node* node) {
+BinarySearchTree::Node* BinarySearchTree::copy(const Node* node) {
     if (!node)
         return nullptr;
     Node* newNode = new Node(node->key);
@@ -46,10 +46,13 @@ void BinarySearchTree::print() {
 }
 
 bool BinarySearchTree::insert(int key) {
-    if (contains(key))
-        return false;
-    root = insertRecursive(root, key);
-    return true;
+    if (root == nullptr) {
+        root = new Node(key);
+        return true;
+    }
+    else {
+        return insertRecursive(root, key);
+    }
 }
 
 bool BinarySearchTree::contains(int key){
@@ -57,22 +60,22 @@ bool BinarySearchTree::contains(int key){
 }
 
 bool BinarySearchTree::erase(int key) {
-    if (!contains(key))
-        return false;
-    root = eraseRecursive(root, key);
-    return true;
+    return eraseRecursive(root, key);
 }
 
-Node* BinarySearchTree::insertRecursive(Node* root, int key) {
-    if (!root)
-        return new Node(key);
+bool BinarySearchTree::insertRecursive(Node*& node, int data) {
+    if (node == nullptr) {
+        node = new Node(data);
+        return true;
+    }
+    if (data < node->key) {
+        return insertRecursive(node->left, data);
+    }
+    else if (data > node->key)
+    {
 
-    if (key < root->key)
-        root->left = insertRecursive(root->left, key);
-    else if (key > root->key)
-        root->right = insertRecursive(root->right, key);
-
-    return root;
+        return insertRecursive(node->right, data);
+    }
 }
 
 bool BinarySearchTree::containsRecursive(Node* root, int key){
@@ -88,34 +91,45 @@ bool BinarySearchTree::containsRecursive(Node* root, int key){
         return containsRecursive(root->right, key);
 }
 
-Node* BinarySearchTree::eraseRecursive(Node* root, int key) {
-    if (!root)
-        return root;
-
-    if (key < root->key)
-        root->left = eraseRecursive(root->left, key);
-    else if (key > root->key)
-        root->right = eraseRecursive(root->right, key);
-    else {
-        if (!root->left) {
-            Node* temp = root->right;
-            delete root;
-            return temp;
-        }
-        else if (!root->right) {
-            Node* temp = root->left;
-            delete root;
-            return temp;
-        }
-
-        Node* temp = root->right;
-        while (temp->left)
-            temp = temp->left;
-
-        root->key = temp->key;
-        root->right = eraseRecursive(root->right, temp->key);
+bool BinarySearchTree::eraseRecursive(Node*& node, int data) {
+    if (node == nullptr) {
+        return false;
     }
-    return root;
+    else if (data < node->key) {
+        return eraseRecursive(node->left, data);
+    }
+    else if (data > node->key) {
+        return eraseRecursive(node->right, data);
+    }
+    else {
+        if (node->left == nullptr && node->right == nullptr) {
+            delete node;
+            node = nullptr;
+        }
+        else if (node->left == nullptr) {
+            Node* temp = node;
+            node = node->right;
+            delete temp;
+        }
+        else if (node->right == nullptr) {
+            Node* temp = node;
+            node = node->left;
+            delete temp;
+        }
+        else {
+            Node* minRight = findMinElement(node->right);
+            node->key = minRight->key;
+            eraseRecursive(node->right, minRight->key);
+        }
+        return true;
+    }
+}
+
+BinarySearchTree::Node* BinarySearchTree::findMinElement(Node* node) {
+    while (node->left != nullptr) {
+        node = node->left;
+    }
+    return node;
 }
 
 void BinarySearchTree::printRecursive(Node* root) {
